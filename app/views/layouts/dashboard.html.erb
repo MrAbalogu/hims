@@ -249,20 +249,51 @@
                      <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> Claims <span class="fa arrow"></span> </span></a>
                         <% if current_insurer %>
                         <ul class="nav nav-second-level">
-                            <li> <a href="<%=new_insurer_claim_path%>">New Claim </a> </li>
-                            <li> <a href="<%=insurer_claims_path(filter: 'pending')%>">Pending <span class="label label-rouded label-info pull-right"><%=pending_claims_count%></span></a> </li>
-                            <li> <a href="<%=insurer_claims_path(filter: 'vetted')%>">Vetted Claims<span class="label label-rouded label-success pull-right"></span></a> </li>
-                            <li> <a href="<%=insurer_claims_path(filter: 'rejected')%>">Rejected Claims<span class="label label-rouded label-danger pull-right"></span></a> </li>
+                            <li>
+                              <%= link_to new_insurer_claim_path, method: :get do %>
+                                New Claim
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to insurer_claims_path(filter: 'pending'), method: :get do %>
+                                Pending<span class="label label-rouded label-info pull-right"><%=pending_claims_count%></span>
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to insurer_claims_path(filter: 'vetted'), method: :get do %>
+                                Vetted Claims<span class="label label-rouded label-success pull-right"><%=pending_claims_count%></span>
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to insurer_claims_path(filter: 'rejected'), method: :get do %>
+                                Rejected Claims<span class="label label-rouded label-danger pull-right"><%=pending_claims_count%></span>
+                              <% end %> 
+                            </li>
                         </ul>
                         <% elsif current_provider %>
                        
                         <ul class="nav nav-second-level">
-                            <li> <a href="<%=new_provider_claim_path%>">New Claim </a> </li>
-                            <li> <a href="<%=provider_claims_path(filter: 'pending')%>">Pending<span class="label label-rouded label-info pull-right"></span></a> </li>
+                            <li>
+                              <%= link_to new_provider_claim_path, method: :get do %>
+                                New Claim
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to provider_claims_path(filter: 'pending'), method: :get do %>
+                                Pending<span class="label label-rouded label-info pull-right"></span>
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to provider_claims_path(filter: 'vetted'), method: :get do %>
+                                Vetted Claims<span class="label label-rouded label-success pull-right"></span>
+                              <% end %> 
+                            </li>
+                            <li>
+                              <%= link_to provider_claims_path(filter: 'rejected'), method: :get do %>
+                                Rejected Claims<span class="label label-rouded label-danger pull-right"></span>
+                              <% end %> 
+                            </li>
 
-                             <li> <a href="<%=provider_claims_path(filter: 'rejected')%>">Rejected<span class="label label-rouded label-danger pull-right"></span></a> </li>
-
-                            <li> <a href="<%=provider_claims_path%>">All Claims<span class="label label-rouded label-danger pull-right"></span></a> </li>
                         </ul>
                     
                         <% else %>
@@ -271,22 +302,38 @@
                     </li>
 
                     <% if current_insurer %>
-
-                        <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolees <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                      <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> Enrolees <span class="fa arrow"></span> </span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="<%=new_insurer_enrolee_path%>">New Enrolee</a></li>
-                            <li> <a href="#">Pending<span class="label label-rouded label-danger pull-right"></span></a></li>
-                            <li><a href="<%=insurer_enrolees_quicksearch_path%>">QuickSearch </a> </li>
-                            <li> <a href="<%=insurer_enrolees_path%>">View all</a></li>
+                          <li>
+                            <%= link_to new_insurer_enrolee_path, method: :get do %>
+                              New Enrolee
+                            <% end %> 
+                          </li>
+                          <li>
+                            <%= link_to new_insurer_enrolee_path, method: :get do %>
+                              Pending<span class="label label-rouded label-danger pull-right"></span>
+                            <% end %> 
+                          </li>
+                          <li>
+                            <%= link_to insurer_enrolees_quicksearch_path, method: :get do %>
+                              Quick Search
+                            <% end %> 
+                          </li>
+                          <li>
+                            <%= link_to insurer_enrolees_path, method: :get do %>
+                              View all
+                            <% end %> 
+                          </li>
                         </ul>
-                    </li>
+                      </li>
 
-                       <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-list p-r-10"></i> <span class="hide-menu"> Plans <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
-                        <ul class="nav nav-second-level">
-                            <li> <a href="<%=new_insurer_plan_path%>">Add Plan</a></li>
-                            <li> <a href="<%=insurer_plans_path%>">Manage Plans<span class="label label-rouded label-danger pull-right"></span></a></li>
-                        </ul>
-                    </li>
+                       <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-list p-r-10">
+                         </i> <span class="hide-menu"> Plans <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                          <ul class="nav nav-second-level">
+                              <li> <a href="<%=new_insurer_plan_path%>">Add Plan</a></li>
+                              <li> <a href="<%=insurer_plans_path%>">Manage Plans<span class="label label-rouded label-danger pull-right"></span></a></li>
+                          </ul>
+                      </li>
 
                       <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-home p-r-10"></i> <span class="hide-menu"> Companies <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
                         <ul class="nav nav-second-level">
@@ -302,11 +349,12 @@
                         </ul>
                     </li>
 
-
-                      
                     <% elsif current_provider %>
-                         <li> <a href="<%=provider_panelist_path%>" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolee Panelist </span></a>
-                         </li>
+                      <li>
+                        <%= link_to provider_panelist_path, method: :get, class: 'waves-effect' do %>
+                          <i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolee Panelist </span>
+                        <% end %> 
+                      </li>
                       
                     <% else %>
                              <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolees </span></a>
