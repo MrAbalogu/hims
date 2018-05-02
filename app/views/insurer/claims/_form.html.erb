@@ -1,0 +1,137 @@
+
+
+<%= form_with(model: claim, url: insurer_claims_path, local: true, class: 'form') do |form| %>
+  <% if claim.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(claim.errors.count, "error") %> prohibited this claim from being saved:</h2>
+
+      <ul>
+      <% claim.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+          <div class="row">     
+          <div class="col-md-6">
+                                    <label class="col-md-12" for="insurer_id"> Health Insurer
+                                    </label>
+                                      <div class="col-md-12">
+                                     <%= form.select :insurer_id, options_for_select([[current_insurer.company_name, current_insurer.id]], current_insurer.id), {}, {id: :claim_insurer_id, class: 'form-control', disabled: true} %>
+                                     <%= form.hidden_field :insurer_id, value: current_insurer.id %>
+                                    </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="" for="bdate">Date</span>
+                                    </label>
+                                    <div class="">
+                                      <%= form.text_field :date, class: 'form-control mydatepicker', type: 'datetime-local', value: Time.now, id: 'example-datetime-local-input' %>
+
+                                    </div>
+            </div>
+            
+     </div>
+     </div>
+
+
+
+    <div class="row">
+            <div class="col-md-6">
+                <div class="">
+                                                <label class="col-md-12" for="member_code">Member/Enrolee Code
+                                                </label>
+                                                <div class="col-md-12">
+                                                <%= form.text_field :member_number, id: :claim_member_number, class: 'form-control', placeholder: 'Enter Enrolee Code e.g. MFN/2018/PN/0001' %>
+                                                </div>
+                </div>
+
+              
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="">
+                                                    <label class="col-md-12" for="member_name">Member FullName
+                                                    </label>
+                                                    <div class="col-md-12">
+                                                    <%= form.text_field :member_name, id: :claim_member_name, class: 'form-control', placeholder: 'Enter Member Name e.g. JOHN AKIN' %>
+                                                    </div>
+                    </div>
+            </div>
+    </div>
+<br/>
+  
+                               
+
+    <div class="row">
+
+                      <div class="col-md-6">
+                        <label for="provider_name"> Select Provider </label>
+                        <div class="">
+                            <%=form.select :provider_id, options_for_select(Provider.all.collect {|p| [ p.company_name, p.id ] }, Provider.first.id), {}, {id: 'provider_id', class: 'form-control'} %>
+                        </div>
+                        <span class="validate_notification"></span>
+                      </div>
+
+                      <div class="col-md-6">
+                         
+                                                <label class="col-md-12" for="member_code"> Authorization Code <i> (optional)</i>
+                                                </label>  
+                                                <div class="col-md-12">
+                                                <%= form.text_field :authorization_number, class: 'form-control', placeholder: 'Enter Authorization Code for treatment if applicable' %>
+                                                </div>
+
+                      </div>
+    </div>
+    <br/>
+
+    <br/>
+    <div class="row">
+
+                      <div class="col-md-6">
+
+
+                                        <label class="" for="authority_name"> Facility Authority Name
+                                        </label>
+                                        <div class="">
+                                        <%= form.text_field :authority_name, id: :claim_authority_name, class: 'form-control', placeholder: 'Dr. Mike Gabby'%>
+                                        </div>
+                        </div>
+
+                      <div class="col-md-6">
+                                        <label class="" for="authority_designation">Designation
+                                        </label>
+                                        <div class="">
+                                        <%= form.text_field :authority_designation, id: :claim_authority_designation, class: 'form-control', placeholder:'Designation e.g. Managing Director(MD)' %>
+                                        </div>
+                      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+        <br/><hr/>
+        <div class="row">
+            <div class="col-md-6">
+        
+                <button type="submit" class="btn btn-inverse btn-md waves-effect waves-light pull-left">Cancel</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn  btn-lg btn-info btn-block waves-effect waves-light m-r-10" data-disable-with="Processing ...">Continue to Next Step >></button>
+            </div>
+      </div>
+ 
+<% end %>
+
+
+
+               

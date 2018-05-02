@@ -1,0 +1,109 @@
+
+    <div id="page-wrapper" class="printArea">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Claim Invoice</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=@claim.provider.company_name%></a></li>
+                            <li class="active">Payment Invoice</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3><b>CLAIM NO</b> <span class="pull-right">#<%= @claim.claim_no%></span></h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <address>
+                                            <h3> &nbsp;<b class="text-danger"><%=@claim.provider.company_name%></b></h3>
+                                            <p class="text-muted m-l-5 break-word" style="width:160px; word-wrap:break-word;"><%=@claim.provider.address%></p>
+                                        </address>
+
+                                        <br/>
+                                        <h5><b class="text-success">Patient/Member No: </b> <b><%=@claim.member_number%></b></h5> <br/>
+                                         <h5><b class="text-success">Authorization Code: </b> <b><%=@claim.authorization_number%></b></h5>
+                                    </div>
+                                    <div class="pull-right text-right">
+                                        <address>
+                                            <h3>To,</h3>
+                                            <h4 class="font-bold"><%=@claim.insurer.company_name%></h4>
+                                            <p class="text-muted m-l-30" style="width:160px; word-wrap:break-word;"><%=@claim.insurer.address%></p>
+                                            <p class="m-t-30"><b>Claim Date :</b> <i class="fa fa-calendar"></i> <%=@claim.created_at.to_formatted_s(:long) %></p>
+                                            <p><b>Due Date :</b> <i class="fa fa-calendar"></i> <%=(@claim.created_at + (2*7*24*60*60)).to_formatted_s(:long)%></p>
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="table-responsive m-t-40">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th>Item Type</th>
+                                                    <th>Item Name</th>
+                                                    <th class="text-right">Qty</th>
+                                                  
+                                                    <th class="text-right">Vetted Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% counter = 1 %>
+                                            <% @claim.services.each do |service| %>
+                                                <tr>
+                                                    <td class="text-center"><%=counter%></td>
+                                                    <td><%=service.service_type%></td>
+                                                    <td><%=service.name%></td>
+                                                    <td class="text-right"><%=service.qty%></td>
+                                            
+                                                    <td class="text-right">₦<%=service.vetted_cost%></td>
+                                                </tr>
+                                                <% counter +=1 %>
+                                              <% end %>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <br/><br/>
+                                    <div class="pull-left">
+                                    <code><b> Comments</b></code>
+                                    <span> <%=@claim.insurer_comment%></span>
+                                    </div>
+                                    <div class="pull-right m-t-30 text-right">
+                                        <p>Sub - Total amount: <%=@claim.authorized_amount%></p>
+                                        <p>vat (%) : ₦0.0 </p>
+                                        <hr>
+                                        <h3><b>Total Approved for Payment:</b>₦ <%=@claim.authorized_amount%> </h3> </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="text-right">
+                                        <a href="#" class="btn btn-success" data-confirm="This will convert your file to pdf format."> Save AS PDF </a>
+                                        <button onClick="javascript:window.print();" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .row -->
+                <!-- /.row -->
+                <!-- .right-sidebar -->
+               
+                <!-- /.right-sidebar -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIISafrica </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+

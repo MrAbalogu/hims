@@ -1,0 +1,26 @@
+
+                                    <% counter = 1 %>
+                                    <% @claim.services.each do |service| %>
+                                        <tr>
+                                            <th scope="row"><%= counter %></th>
+                                            <td><%=service.service_type%></td>
+                                            <td><%= service.name%></td>
+                                            <td><%= service.qty%></td>
+                                            
+                                            <td><%=service.cost%></td>
+                                            <td>
+
+                                            
+                                            <%= form_for(@claim.services.find(service.id), html: {method: :delete}, remote: true ) do |f| %>
+                                      
+                                            <button type="submit" class='fa fa-trash m-r-5' style="color: red;" data-confirm="Are you sure? This item will be removed from claim"></button>
+
+                                            <% end %>
+                                            
+                                            
+                                            </td>
+                                        </tr>
+                                        <% counter += 1%>
+                                    <% end %>
+                                       
+                                        

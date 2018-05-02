@@ -1,0 +1,383 @@
+    
+    <%= render 'layouts/shared/nav' %>
+    <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Claim Preview</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=@claim.provider.company_name%></a></li>
+                            <li class="active">Claim Summary</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3><b>CLAIM NO</b> <span class="pull-right">#<%= @claim.claim_no%></span></h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <address>
+                                            <h3> &nbsp;<b class="text-danger"><%=@claim.provider.company_name%></b></h3>
+                                           <p class="text-muted m-l-5 break-word" style="width:160px; word-wrap:break-word;"><%=@claim.provider.address%></p>
+                                              <span class="text-muted"><i class="fa fa-phone"></i> - <%=@claim.provider.phone%></span>
+                                        </address>
+
+                                        <br/>
+                                        <h5><b class="text-success">Patient/Member No: </b> <b><%=@claim.member_number%></b></h5> <br/>
+                                         <h5><b class="text-success">Authorization Code: </b> <b><%=@claim.authorization_number%></b></h5>
+                                    </div>
+                                    <div class="pull-right text-right">
+                                        <address>
+                                            <h3>To,</h3>
+                                            <h4 class="font-bold"><%=@claim.insurer.company_name%></h4>
+                                            <p class="text-muted m-l-30" style="width:160px; word-wrap:break-word;"><%=@claim.insurer.address%>, <br/> <i class="fa fa-phone"></i> - <%=@claim.insurer.phone%></p>
+                                            <p class="m-t-30"><b>Claim Date :</b> <i class="fa fa-calendar"></i> <%=@claim.created_at.to_formatted_s(:long) %></p>
+                                            <p><b>Due Date :</b> <i class="fa fa-calendar"></i> <%=(@claim.created_at + (2*7*24*60*60)).to_formatted_s(:long)%></p>
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                            
+
+
+
+                                 <div class="row">
+
+
+                                        
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">Requested Amount   <div class="panel-action"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a></div>
+                                            </div>
+                                            <div class="panel-wrapper">
+                                                <div class="panel-body">
+
+
+                                                    <div class="col-md-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="text-center">#</th>
+                                                                        <th>Type</th>
+                                                                        <th>Name</th>
+                                                                        <th class="text-right">Qty</th>
+                                                                      
+                                                                        <th class="text-left">Total(₦)</th>
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <% counter = 1 %>
+                                                                <% @claim.services.each do |service| %>
+                                                                    <tr>
+                                                                        <td class="text-center"><%=counter%></td>
+                                                                        <td><%=service.service_type%></td>
+                                                                        <td><%=service.name%></td>
+                                                                        <td class="text-right"><%=service.qty%></td>
+                                                                       
+                                                                        <td class="text-right">
+                                                                         <div class="input-group">
+                                                                            <div class="input-group-addon">₦</div>
+                                                                             <input type="number" id="cost_<%=counter%>" value="<%=total_cost(service)%>" readonly="readonly" />
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        </td>
+                                                                       
+                                                                    </tr>
+                                                                    <% counter +=1 %>
+                                                                <% end %>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                     <div class="panel-footer">  
+
+                                                            <div class="col-md-12">
+
+                                                                    <div class="pull-left">
+                                                                        <code><b>More Details</b></code>
+                                                                        <code> <%=@claim.description%></code>
+                                                                    </div>
+                                                                    <div class="pull-right m-t-30 text-right">
+                                                                         <h3><b> Requested Total :</b>₦ <%=total_claim_cost(@claim)%> </h3> 
+                                                                    </div>
+                                                                
+                                                            
+                                                             </div>
+
+                                                              <hr/>
+                                                              <div class="med-bills">
+                                                                <hr/> <br/>
+                                                                <h4 style="text-decoration: underline;"> Medical Bills Attached </h4>
+                                                                <% if @claim.attachments.any? %>
+                                                                    <span class="pull-left badge badge-info" style="background-color: #737979;">  <i class="fa fa-file"> </i> <i><%=pluralize(@attachment_count, "file")%> Attached </i></span>
+                                                                    <br/>
+                                                                    <% if @claim.attachments.any? %>
+                                                                    <% counter = 1 %>
+                                                                      <% @claim.attachments.each do |attachment| %>
+                                                                      <a href="<%=attachment.url%>" target="_blank"><i class="fa fa-download"> Download Doc<%=counter%> </i> </a>
+                                                                      <% counter += 1 %>
+                                                                      <% end %>
+                                                                    <% end %>
+                                                                <% else %>
+                                                                 <span class="pull-left badge"> - No Files Attached </span>
+                                                                 <% end %>
+                                                             </div>
+
+
+                                                     </div>
+                                                </div>
+
+                                                
+                                               
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12"> <br/><br/><br/><br/><br/><br/><br/><br/>
+                                    <% services_count = @claim.services.count %>
+                                        <button class="btn btn-success btn-md" onClick="PopulateVetted(<%=services_count%>);" style="line-height: 30px;"> <i class="fa fa-mail-forward"> </i></button> <br/><br/>
+                                         <button class="btn btn-danger btn-md" onClick="RemoveVetted(<%=services_count%>);" style="line-height: 30px;"> <i class="fa fa-mail-reply"> </i></button> <br/>
+                                    </div>
+
+
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">Vetted Amount
+                                                <div class="panel-action"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a></div>
+                                            </div>
+                                            <div class="panel-wrapper">
+                                                <%= form_tag({controller: 'insurer/claims', action: 'submit_vetted'}) do %>
+                                                <div class="panel-body">
+
+                                                <div class="col-md-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                     <th class=""> Approved Total</th>
+                                                                      
+                                                                        <th>Name</th>
+                                                                        <th class="text-right">Qty</th>
+                                                                       
+                                                                        
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                               
+                                                                <% counter = 1 %>
+                                                                <% @claim.services.each do |service| %>
+                                                                    <tr>
+                                                                    <td class="text-right">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-addon">₦</div>
+                                                                             <input type="number" id="vetted_cost_<%=counter%>" placeholder="Approved cost" onchange="UpdateTotal(<%=@claim.services.count%>);" name="vc-<%=service.id%>" />
+                                                                        </div>
+                                                                        
+                                                                        </td>
+                                                                        
+                                                                     
+                                                                        <td><%=service.name%></td>
+                                                                        <td class="text-right"><%=service.qty%></td>
+                                                                         
+                                                                        
+                                                                       
+                                                                    </tr>
+                                                                    <% counter +=1 %>
+                                                                <% end %>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                
+                                                </div>
+                                                <div class="panel-footer" style="padding:0px;">
+
+                                                        <div class="col-md-12">
+                                                            <div class=" m-t-20">
+
+                                                            
+                                                                        <div class="input-group">
+
+                                                                            <div class="input-group-addon btn-outline">Vetted Total</div>
+                                                                                <input type="number" name="vetted_total" id="vetted_total" readonly="readonly"/>
+                                                                                <div class="input-group-addon">₦</div>
+                                                                        </div> <br/>
+                                                                        
+                                                                    
+                                                                        <div class="pull-left" style="padding-bottom:10px;">
+                                                                                <label for="comments"><b>Comments</b></label> <br/>
+                                                                                
+                                                                                <textarea name="insurer_comment" placeholder="Enter Comment (Optional)" class="form-control"></textarea> 
+
+                                                                        </div>
+                                                                        <hr>
+                                                                        <input type="hidden" name="claim_id" value="<%=@claim.id%>%"/>
+                                                                       
+
+                                                                        <button type="submit" class="btn btn-success btn-md btn-block pull-right" style="color: #fff;" data-disable-with="Processing">Save and Generate Invoice </button>
+                                                                        
+
+                                                                    <div class="clearfix">
+                                                                    
+                                                                    </div>
+
+                                                                
+                                                            </div>
+
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <% end %>
+                                    </div>
+
+
+                                </div>
+
+                                
+
+                                   
+                                </div >
+
+
+
+
+                           
+
+
+
+                            </div>
+
+
+                             <div class="row tariff-plan">
+                              <div class="col-sm-12">
+
+                                <div class="panel panel-default">
+                                            <div class="panel-heading"> Provider Tariff Plan <i> Not Uploaded Yet </i>
+                                                <div class="panel-action"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a></div>
+                                            </div>
+                                            <div class="panel-wrapper">
+                                                
+                                                <div class="panel-body">
+
+                                                <div class="col-md-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                     <th class=""> Service Name</th>
+                                                                     <th> Service Type </th>
+                                                                      
+                                                                        <th>Cost </th>
+                                                                        <th class="text-right">More Details</th>
+                                                                       
+                                                                        
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                               
+                                                               
+                                                                    <tr>
+                                                                    <td class="text-right">
+                                                                        
+                                                                        
+                                                                        </td>
+                                                                        
+                                                                     
+                                                                        <td></td>
+                                                                        <td class="text-right"></td>
+                                                                         
+                                                                        
+                                                                       
+                                                                    </tr>
+                                                                   
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                
+                                                </div>
+                                               
+                                        </div>
+                                    
+                              </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .row -->
+                <!-- /.row -->
+                <!-- .right-sidebar -->
+               
+                <!-- /.right-sidebar -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIISafrica </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+<script type="text/javascript">
+
+function PopulateVetted(services_count) {
+    counter = services_count;
+    i = 1;
+    vetted_total = 0;
+    while(i <= counter) {
+        $('#vetted_cost_'+i).val($('#cost_'+i).val());
+         cost = $('#vetted_cost_'+i).val();
+         cost = parseFloat(cost);
+         vetted_total += cost
+         i++;
+    };
+    $('#vetted_total').val(vetted_total);
+    toastr.success('Vetted Costs populated successfully', 'Success');
+};
+
+function RemoveVetted(services_count) {
+     counter = services_count;
+    i = 1;
+    while(i <= counter) {
+        $('#vetted_cost_'+i).val("");
+         i++;
+    };
+     $('#vetted_total').val("");
+     toastr.info('Vetted Costs cleared', 'Success');
+};
+
+function UpdateTotal(services_count) {
+    counter = services_count;
+    i = 1;
+    vetted_total = 0;
+    while(i <= counter) {
+        cost = $('#vetted_cost_'+i).val();
+        cost = parseFloat(cost);
+        vetted_total += cost;
+        i++;
+    };
+
+    $('#vetted_total').val(vetted_total);
+
+};
+
+</script>

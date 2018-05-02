@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  name: MyString
+  cost: 9.99
+  qty: 1
+  description: MyText
+  claim.references: MyString
+
+two:
+  type: 
+  name: MyString
+  cost: 9.99
+  qty: 1
+  description: MyText
+  claim.references: MyString

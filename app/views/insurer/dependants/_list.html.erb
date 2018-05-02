@@ -1,0 +1,39 @@
+
+                                    <% counter = 1 %>
+                                    <% @enrolee.dependants.each do |dependant| %>
+                                        <tr>
+                                            <th scope="row"><%= counter %></th>
+                                            <td><%=dependant.surname%></td>
+                                            <td><%= dependant.firstname%></td>
+                                            <td><%= dependant.middlename%></td>
+                                            <td><%= dependant.enrolee_number %></td>
+                                            
+                                            <td><%=dependant.dependant_type%></td>
+                                            <td><%= dependant.dob%></td>
+                                            <td>
+                                                <% if dependant.card_issued %>
+                                                <span class="badge badge-success">Yes </span>
+
+                                                <% else %>
+                                                <span class="badge badge-default">No </span>
+                                               
+
+                                                <% end %>
+                                             </td>
+                                            <td>
+                                            
+                                           
+                                            
+                                          <%= form_for(@enrolee.dependants.find(dependant.id), url: insurer_dependant_path(dependant), html: {method: :delete}, remote: true ) do |f| %>
+                                          
+                                            <button type="submit" class='fa fa-trash m-r-5' style="color: red;" data-confirm="Are you sure? This dependant will be removed from list"></button>
+
+
+                                            <% end %>
+                                             
+                                            
+                                            
+                                            </td>
+                                        </tr>
+                                        <% counter += 1%>
+                                        <% end %>

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @dependant.surname %>
+</p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @dependant.firstname %>
+</p>
+
+<p>
+  <strong>Middlename:</strong>
+  <%= @dependant.middlename %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @dependant.dob %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @dependant.sex %>
+</p>
+
+<p>
+  <strong>Blood group:</strong>
+  <%= @dependant.blood_group %>
+</p>
+
+<p>
+  <strong>Primary hospital:</strong>
+  <%= @dependant.primary_hospital %>
+</p>
+
+<p>
+  <strong>Secondary hospital:</strong>
+  <%= @dependant.secondary_hospital %>
+</p>
+
+<p>
+  <strong>Genotype:</strong>
+  <%= @dependant.genotype %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @dependant.photo %>
+</p>
+
+<p>
+  <strong>Enrolee.references:</strong>
+  <%= @dependant.enrolee.references %>
+</p>
+
+<%= link_to 'Edit', edit_dependant_path(@dependant) %> |
+<%= link_to 'Back', dependants_path %>

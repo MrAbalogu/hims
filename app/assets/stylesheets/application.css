@@ -1,0 +1,54 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap/dist/css/bootstrap.min 
+ *= require plugins/bower_components/bootstrap-extension/css/bootstrap-extension         
+ *= require plugins/bower_components/lobipanel/dist/css/lobipanel.min 
+ *= require plugins/bower_components/sidebar-nav/dist/sidebar-nav.min 
+ *= require plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min
+ *= require plugins/bower_components/morrisjs/morris 
+ *= require css/animate 
+ *= require plugins/bower_components/register-steps/steps 
+ *= require css/style 
+ *= require plugins/bower_components/toast-master/css/jquery.toast
+ *= require toastr
+ *= require css/colors/green
+ *= require font-awesome
+
+ *= require dataTables/jquery.dataTables
+ 
+ *= require_self
+
+
+
+ .modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+
+ */
+

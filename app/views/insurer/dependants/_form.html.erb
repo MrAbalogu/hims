@@ -1,0 +1,74 @@
+
+
+<%= form_with(model: dependant, url: insurer_dependants_path, local: true) do |form| %>
+  <% if dependant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dependant.errors.count, "error") %> prohibited this dependant from being saved:</h2>
+
+      <ul>
+      <% dependant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname, id: :dependant_surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :firstname %>
+    <%= form.text_field :firstname, id: :dependant_firstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middlename %>
+    <%= form.text_field :middlename, id: :dependant_middlename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dob %>
+    <%= form.datetime_select :dob, id: :dependant_dob %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex %>
+    <%= form.text_field :sex, id: :dependant_sex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blood_group %>
+    <%= form.text_field :blood_group, id: :dependant_blood_group %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primary_hospital %>
+    <%= form.text_field :primary_hospital, id: :dependant_primary_hospital %>
+  </div>
+
+  <div class="field">
+    <%= form.label :secondary_hospital %>
+    <%= form.text_field :secondary_hospital, id: :dependant_secondary_hospital %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genotype %>
+    <%= form.text_field :genotype, id: :dependant_genotype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo %>
+    <%= form.text_field :photo, id: :dependant_photo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enrolee.references %>
+    <%= form.text_field :enrolee.references, id: :dependant_enrolee.references %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

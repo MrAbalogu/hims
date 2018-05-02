@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dependants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Surname</th>
+      <th>Firstname</th>
+      <th>Middlename</th>
+      <th>Dob</th>
+      <th>Sex</th>
+      <th>Blood group</th>
+      <th>Primary hospital</th>
+      <th>Secondary hospital</th>
+      <th>Genotype</th>
+      <th>Photo</th>
+      <th>Enrolee.references</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dependants.each do |dependant| %>
+      <tr>
+        <td><%= dependant.surname %></td>
+        <td><%= dependant.firstname %></td>
+        <td><%= dependant.middlename %></td>
+        <td><%= dependant.dob %></td>
+        <td><%= dependant.sex %></td>
+        <td><%= dependant.blood_group %></td>
+        <td><%= dependant.primary_hospital %></td>
+        <td><%= dependant.secondary_hospital %></td>
+        <td><%= dependant.genotype %></td>
+        <td><%= dependant.photo %></td>
+        <td><%= dependant.enrolee.references %></td>
+        <td><%= link_to 'Show', insurer_dependant_path(dependant) %></td>
+        <td><%= link_to 'Edit', edit_insurer_dependant_path(dependant) %></td>
+        <td><%= link_to 'Destroy', insurer_dependant_path(dependant), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dependant', new_insurer_dependant_path %>

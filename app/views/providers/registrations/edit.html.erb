@@ -1,0 +1,181 @@
+
+    <%= render 'layouts/shared/nav' %>
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Edit Account</h4> </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                           
+                        </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+
+
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-material form-horizontal' }) do |f| %>
+                 <%= devise_error_messages! %>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                      <div class="col-sm-12">
+                          <div class="white-box">
+                              <h3 class="box-title">Basic Information</h3>
+
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="example-text">Name
+                                      </label>
+                                      <div class="col-md-12">
+                                        <%= f.text_field :company_name, class: 'form-control' %>
+                                        
+                                      </div>
+                                  </div>
+
+                                 
+                                 
+                              
+                                  <div class="form-group">
+                                      <label class="col-sm-12">Avatar Image</label>
+                                      <div class="col-sm-12">
+                                        
+                                          <% if current_provider.photo?  %>
+                                           
+                                                    <img src="<%= current_provider.photo.thumb.url%>" alt="profile photo" class="img-responsive" style="max-width:120px;">
+
+                                                    <button type="button" class="close-btn">X</button>
+
+                                                     <label>
+                                                      <%= f.check_box :remove_photo %>
+                                                      Remove Avatar Image
+                                                    </label>
+                                                 
+                                            <% end %>
+                                      </div>
+                                      <div class="col-sm-12">
+
+
+                                              <%= f.file_field :photo, class: 'form-control' %>
+                                              <%= f.hidden_field :photo_cache %>
+                                      </div>
+
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="special">Address
+                                      </label>
+                                      <div class="col-md-12">
+                                        <%= f.text_area :address, class: 'form-control' %>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-md-12">Description</label>
+                                      <div class="col-md-12">
+                                          <%= f.text_area :description, class: 'form-control' %>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="url">Website URL
+                                      </label>
+                                      <div class="col-md-12">
+                                        <%= f.text_area :website, placeholder: 'website url', class: 'form-control' %>
+                                      
+                                      </div>
+                                  </div>
+                                
+                              
+                          </div>
+                      </div>
+
+                       <div class="col-sm-12">
+                          <div class="white-box">
+                              <h3 class="box-title">Account Information</h3>
+
+
+                               <div class="form-group">
+                                      <label class="col-md-12" for="example-text">Email
+                                      </label>
+                                      <div class="col-md-12">
+                                        <%= f.email_field :email, class: 'form-control' %>
+                                        
+                                      </div>
+                                  </div>
+
+                                   <div class="form-group">
+                                      <label class="col-md-12" for="example-text">Phone
+                                      </label>
+                                      <div class="col-md-12">
+                                        <%= f.text_field :phone, class: 'form-control' %>
+                                        
+                                      </div>
+                                  </div>
+
+
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="">Password
+                                      </label><small>(leave blank if you don't want to change it)</small>
+                                      <div class="col-md-12">
+                                          <%= f.password_field :password, autocomplete: "off", placeholder: '6 Chars Minimum', class: 'form-control' %>
+                                          
+                                      </div>
+                                  </div> 
+
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="example-phone">Confirm Password
+                                      </label>
+                                      <div class="col-md-12">
+
+                                          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+
+                                      </div>
+                                  </div>
+                                  
+
+                                  <div class="form-group">
+                                      <label class="col-md-12" for="pwd">Current Password
+                                      </label><small>(we need your current password to confirm your changes)</small>
+                                      <div class="col-md-12">
+
+                                         <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+                                        
+                                      </div>
+                                      <div class="col-sm-12">
+                                       
+                                              <button type="submit" class="btn btn-info btn-md">Submit</button>
+                                          <button class="btn btn-inverse btn-md">Cancel</button>
+                                       
+                                      </div>
+                          
+                                  </div>
+
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+                
+                        
+
+
+                <% end %>
+
+                <div class="row">
+                   
+                    <div class="col-sm-12">
+
+                      <h3>Cancel my account</h3>
+
+                      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: 'btn btn-danger btn-md', data: { confirm: "Are you sure? Your Account will be Removed. This cannot be undone." }, method: :delete %></p>
+                    </div>
+                   
+                </div>
+               
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HiisAfrica </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+

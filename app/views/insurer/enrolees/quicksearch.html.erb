@@ -1,0 +1,118 @@
+ <%= render 'layouts/shared/nav' %>
+ <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">All Enrolee Details</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=current_insurer.company_name%></a></li>
+                            <li class="active">Quick Search</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Enrolees</h1>
+
+<%= link_to 'New Enrolee', new_insurer_enrolee_path, class: 'btn btn-success btn-md pull-right' %> <br/><hr/>
+
+
+
+
+
+
+
+<table id="enrolees_table", data-source="<%= insurer_enrolees_path(format: :json) %>" class="table table-responsive table-striped table-bordered">
+  <thead class="success">
+    <tr>
+      <th>Surname</th>
+      <th>Firstname</th>
+     <!--  <th>Company</th> -->
+      <th>Enrolee number</th>
+      <th>Primary provider</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>State</th>
+      <th>Cover status</th>
+    <!--   <th>Card issued</th> -->
+      <th>Plan</th>
+      <th>Expiry date</th>
+     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+   
+  </tbody>
+</table>
+
+<br>
+
+
+
+                           
+
+                   
+
+
+
+
+
+
+        
+
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIIS </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+  $('#enrolees_table').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": $('#enrolees_table').data('source'),
+    "pagingType": "full_numbers",
+    "columns": [
+      {"data": "surname"},
+      {"data": "firstname"},
+      {"data": "enrolee_number"},
+      {"data": "primary_provider"},
+       {"data": "phone"},
+        {"data": "email"},
+         {"data": "state"},
+          {"data": "cover_status"},
+           {"data": "plan"},
+            {"data": "expiry_date"}
+
+
+    ]
+    // pagingType is optional, if you want full pagination controls.
+    // Check dataTables documentation to learn more about
+    // available options.
+  });
+});
+</script>
+
+
+
+
+
+

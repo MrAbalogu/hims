@@ -1,0 +1,152 @@
+   <!-- Preloader -->
+    
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+                <div class="top-left-part"><a class="logo" href="<%=root_path%>"><b><%= image_tag('hiisafrica-xx.png', alt: 'Logo')%></b><span class="hidden-xs"><strong>HIIS </strong></span></a></div>
+                <ul class="nav navbar-top-links navbar-left hidden-xs">
+                    <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+                   
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+
+
+                    <li class="dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-person">Menu</i>
+          <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+          </a>
+                        <ul class="dropdown-menu mailbox animated bounceInDown">
+                            <li>
+                                <a href="#"> About HIIS </a>
+                            </li>
+                            <li>
+                                <a href="#">Contact Us </a>
+                                
+                            </li>
+                            <hr/>
+                            <li> <a href="#">Request A Demo </a></li>
+                           
+                        </ul>
+                        
+                    </li>
+                    <!-- /.dropdown -->
+                   
+                    <li class="dropdown">
+
+
+                        <% if insurer_signed_in? %>
+                                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <%=user_avatar(current_insurer, alt: 'user-img', class: 'img-circle', width: '36')%><b class="hidden-xs">
+                                <%= current_insurer.company_name %>
+
+                        <% elsif provider_signed_in? %>
+                                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <%=user_avatar(current_provider, alt: 'user-img', class: 'img-circle', width: '36')%> <b class="hidden-xs">
+                             <%= current_provider.company_name %>
+                        <% else %>
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <b class="hidden-xs">
+                            
+                        <% end %>
+                        
+                        </b> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                        	<% if provider_signed_in? %>
+                        	 <li><a href="<%=provider_dashboard_path%>"><i class="ti-box"></i>  Dashboard</a></li> <hr/>
+
+                        	 <% elsif  insurer_signed_in? %>
+                        	 <li><a href="<%=insurer_dashboard_path%>"><i class="ti-box"></i>  Dashboard</a></li> <hr/>
+                        	 <% else %>
+                        	 <li><a href="<%=new_provider_registration_path%>"><i class="ti-box"></i>  Sign Up</a></li> <hr/>
+
+                        	 <% end %>
+                        	 	
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i>  My Profile</a></li>
+                           
+
+                             <% if insurer_signed_in? %>
+                                <li><a href="<%=edit_insurer_registration_path%>"><i class="ti-settings"></i>  Account Setting</a></li>
+
+                            <% elsif provider_signed_in? %>
+                                 <li><a href="<%=edit_provider_registration_path%>"><i class="ti-settings"></i>  Account Setting</a></li>
+                            <% else %>
+                                 <li><a href="#"><i class="ti-settings"></i>  Account Management</a></li>
+                            <% end %>
+
+
+                              <% if insurer_signed_in? %>
+                            <li><a href="<%=destroy_insurer_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% elsif provider_signed_in? %>
+                             <li><a href="<%=destroy_provider_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                             <% else %>
+                              <li><a href="#" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% end %>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- <li class="right-side-toggle"> <a class="waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li> -->
+                    <!-- /.dropdown -->
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+       
+
+
+
+
+
+
+
+
+
+        <div id="page-wrapper" style="margin: 0px;">
+            <div class="container-fluid">
+                <!-- <div class="row bg-title">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h4 class="page-title" style="text-align: center;">Heath Insurance Management Systems</h4>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12">
+                       
+                    </div>
+                    -->
+                </div> 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title" style="text-align: center;">Welcome to HIIS</h3>
+
+                            <p style="text-align: center;"> HIIS is an innovative health insurance  management system. </p>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card" style="text-align: center; margin: 20px;">
+                                        <i class="fa fa-users fa-5x" style="font-size: 50px; color: green; margin: 30px;"> </i>
+                                        <div class="card-block">
+                                            <h4 class="card-title">Health Insurer</h4>
+                                            <p class="card-text">Click Below to Login</p>
+                                            <a href="<%=new_insurer_session_path%>" class="btn btn-success btn-lg " data-disable-with="Please wait ..."> <i class="fa fa-power-off "></i>  LOG IN NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="text-align: center; margin: 20px;">
+                                         <i class="fa fa-medkit fa-5x " style="font-size: 50px; color: green; margin: 30px;"> </i>
+                                        <div class="card-block">
+                                            <h4 class="card-title">Health Service Provider</h4>
+                                            <p class="card-text">Click Here to Login as a Health Service Provider</p>
+                                            <a href="<%=new_provider_session_path%>" class="btn btn-primary btn-lg " data-disable-with="Please wait ..."><i class="fa fa-power-off "></i> LOG ME IN</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center" style="left: 0px;"> 2018 &copy;  HIIS </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+

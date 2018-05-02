@@ -1,0 +1,399 @@
+<!DOCTYPE html>  
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+ <title>HIIS Health Insurance Management System</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+    
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+     <script type="text/javascript">
+
+      toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000,
+            "preventDuplicates": true,
+            "progressBar": true 
+          }
+          
+    </script>
+
+
+
+
+
+   <!-- 
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../asset/plugins/images/favicon.png">
+
+ -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../asset/favicons/android-icon-192x192.png">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printArea, .printArea * {
+    visibility: visible;
+  }
+  .printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+</style>
+
+
+   
+</head>
+<body>
+  
+   <!-- show contents-->
+   <% unless flash.empty? %>
+	  <script type="text/javascript">
+	      <% flash.each do |f| %>
+	      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+	      toastr['<%= type %>']('<%= f[1] %>').css("width","500px");
+	      <% end %>
+	  </script>
+	 <% end %>
+
+      <!-- Preloader -->
+    
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+                <div class="top-left-part"><a class="logo" href="<%=root_path%>"><b><%= image_tag('hiisafrica-xx.png', alt: 'Logo')%></b><span class="hidden-xs"><strong>HIIS</strong></span></a></div>
+                <ul class="nav navbar-top-links navbar-left hidden-xs">
+                    <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+                    <li>
+                        <form role="search" class="app-search hidden-xs">
+                            <input type="text" placeholder="Search..." class="form-control"> <a href="#"><i class="fa fa-search"></i></a> </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li class="dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
+          <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+          </a>
+                        <ul class="dropdown-menu mailbox animated bounceInDown">
+                            <li>
+                                <div class="drop-title">You have 0 new Noficiations</div>
+                            </li>
+                            <li>
+                                <div class="message-center">
+
+                               
+                                </div>
+                            </li>
+                            <li>
+                                <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+                    <!-- /.dropdown -->
+                   
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+
+
+                        <% if insurer_signed_in? %>
+                                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <%=user_avatar(current_insurer, alt: 'user-img', class: 'img-circle', width: '36')%><b class="hidden-xs">
+                                <%= current_insurer.company_name %>
+
+                        <% elsif provider_signed_in? %>
+                                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <%=user_avatar(current_provider, alt: 'user-img', class: 'img-circle', width: '36')%> <b class="hidden-xs">
+                             <%= current_provider.company_name %>
+                        <% else %>
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <b class="hidden-xs">
+                            Dummy User
+                        <% end %>
+                        
+                        </b> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i>  My Profile</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i>  Inbox</a></li>
+
+                             <% if insurer_signed_in? %>
+                                <li><a href="<%=edit_insurer_registration_path%>"><i class="ti-settings"></i>  Account Setting</a></li>
+
+                            <% elsif provider_signed_in? %>
+                                 <li><a href="<%=edit_provider_registration_path%>"><i class="ti-settings"></i>  Account Setting</a></li>
+                            <% else %>
+                                 <li><a href="#"><i class="ti-settings"></i>  Account Management</a></li>
+                            <% end %>
+
+
+                              <% if insurer_signed_in? %>
+                            <li><a href="<%=destroy_insurer_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% elsif provider_signed_in? %>
+                             <li><a href="<%=destroy_provider_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% end %>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                   
+                    <!-- /.dropdown -->
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Left navbar-header -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+                        <!-- input-group -->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn">
+            <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+            </span> </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li class="user-pro">
+                         <% if insurer_signed_in? %>
+                          
+                              <a href="#" class="waves-effect"><%=user_avatar(current_insurer, alt: '', class: 'img-circle')%><span class="hide-menu">
+                                <%= current_insurer.company_name %>
+
+                        <% elsif provider_signed_in? %>
+                                 <a href="#" class="waves-effect"><%=user_avatar(current_provider, alt: '', class: 'img-circle', width: '36')%> <span class="hide-menu">
+                                    <%= current_provider.company_name %>
+                         <% else %>
+
+                                   <a href="#" class="waves-effect"><img src="#" alt="" class="img-circle"> <span class="hide-menu">
+                               
+                        <% end %>
+
+
+                        <span class="fa arrow"></span></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+
+                            <% if insurer_signed_in? %>
+
+                                <li><a href="<%=edit_insurer_registration_path%>" ><i class="ti-settings"></i>  Account Setting</a></li>
+                            <% elsif provider_signed_in? %>
+                                 <li><a href="<%=edit_provider_registration_path%>"><i class="ti-settings"></i>  Account Setting</a></li>
+                            <% else %>
+                                 <li><a href="#"><i class="ti-settings"></i>  Account Management</a></li>
+                            <% end %>
+
+
+
+
+                            <% if insurer_signed_in? %>
+                            <li><a href="<%=destroy_insurer_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% elsif provider_signed_in? %>
+                             <li><a href="<%=destroy_provider_session_path%>" data-method="delete"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <% end %>
+                        </ul>
+                    </li>
+                    <hr/>
+                    <% if insurer_signed_in? %>
+                      <li>
+                        <%= link_to insurer_dashboard_path, class: 'waves-effect', method: :get do %>
+                          <span class="hide-menu">Dashboard</span>
+                        <% end %> 
+                      </li>
+                    <% elsif provider_signed_in? %>
+                        <li>
+                          <%= link_to provider_dashboard_path, class: 'waves-effect', method: :get do %>
+                            <span class="hide-menu">Dashboard</span>
+                          <% end %> 
+                        </li>
+                    <% else %>
+                      <li>
+                        <%= link_to provider_dashboard_path, class: 'waves-effect', method: :get do %>
+                          <span class="hide-menu">Dashboard</span>
+                        <% end %> 
+                      </li>
+                    <% end %>
+
+                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> Claims <span class="fa arrow"></span> </span></a>
+                        <% if current_insurer %>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=new_insurer_claim_path%>">New Claim </a> </li>
+                            <li> <a href="<%=insurer_claims_path(filter: 'pending')%>">Pending <span class="label label-rouded label-info pull-right"><%=pending_claims_count%></span></a> </li>
+                            <li> <a href="<%=insurer_claims_path(filter: 'vetted')%>">Vetted Claims<span class="label label-rouded label-success pull-right"></span></a> </li>
+                            <li> <a href="<%=insurer_claims_path(filter: 'rejected')%>">Rejected Claims<span class="label label-rouded label-danger pull-right"></span></a> </li>
+                        </ul>
+                        <% elsif current_provider %>
+                       
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=new_provider_claim_path%>">New Claim </a> </li>
+                            <li> <a href="<%=provider_claims_path(filter: 'pending')%>">Pending<span class="label label-rouded label-info pull-right"></span></a> </li>
+
+                             <li> <a href="<%=provider_claims_path(filter: 'rejected')%>">Rejected<span class="label label-rouded label-danger pull-right"></span></a> </li>
+
+                            <li> <a href="<%=provider_claims_path%>">All Claims<span class="label label-rouded label-danger pull-right"></span></a> </li>
+                        </ul>
+                    
+                        <% else %>
+
+                        <% end %>
+                    </li>
+
+                    <% if current_insurer %>
+
+                        <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolees <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=new_insurer_enrolee_path%>">New Enrolee</a></li>
+                            <li> <a href="#">Pending<span class="label label-rouded label-danger pull-right"></span></a></li>
+                            <li><a href="<%=insurer_enrolees_quicksearch_path%>">QuickSearch </a> </li>
+                            <li> <a href="<%=insurer_enrolees_path%>">View all</a></li>
+                        </ul>
+                    </li>
+
+                       <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-list p-r-10"></i> <span class="hide-menu"> Plans <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=new_insurer_plan_path%>">Add Plan</a></li>
+                            <li> <a href="<%=insurer_plans_path%>">Manage Plans<span class="label label-rouded label-danger pull-right"></span></a></li>
+                        </ul>
+                    </li>
+
+                      <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-home p-r-10"></i> <span class="hide-menu"> Companies <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=new_insurer_company_path%>">Add Company</a></li>
+                            <li> <a href="<%=insurer_companies_path%>">Manage Companies<span class="label label-rouded label-danger pull-right"></span></a></li>
+                        </ul>
+                    </li>
+
+                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-book p-r-10"></i> <span class="hide-menu"> Data Upload <span class="fa arrow"></span><span class="label label-rouded label-danger pull-right"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="<%=insurer_enrolees_data_upload_path%>">Enrolees Data</a></li>
+                            <li> <a href="<%=insurer_dependants_data_upload_path%>">Dependant Data<span class="label label-rouded label-danger pull-right"></span></a></li>
+                        </ul>
+                    </li>
+
+
+                      
+                    <% elsif current_provider %>
+                         <li> <a href="<%=provider_panelist_path%>" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolee Panelist </span></a>
+                         </li>
+                      
+                    <% else %>
+                             <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-book p-r-10"></i> <span class="hide-menu"> Enrolees </span></a>
+                             </li>
+                      
+                    <% end %>
+
+
+                      
+                 
+                   
+                   
+                
+                    <li> <a href="javascript:void(0);" class="waves-effect"><i class="icon-chart p-r-10"></i> <span class="hide-menu"> Reports <span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="#">Claims Report</a></li>
+                            <li> <a href="#">Authorization Report</a></li>
+                            <li> <a href="#">Enrolees Report</a></li>
+                        </ul>
+                    </li>
+                   
+              
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- Left navbar-header end -->
+
+    
+
+       
+        <%= yield %>
+
+
+
+<script>
+        var sel = $('#drug_options_sort');
+        var selected = sel.val(); // cache selected value, before reordering
+        var opts_list = sel.find('option');
+        opts_list.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
+        sel.html('').append(opts_list);
+        sel.val(selected); // set cached selected value
+</script>
+
+<script>
+        var selx = $('#service_options_sort');
+        var selectedx = selx.val(); // cache selected value, before reordering
+        var opts_listx = selx.find('option');
+        opts_listx.sort(function(a, b) { return $(a).text() > $(b).text() ? 1 : -1; });
+        selx.html('').append(opts_listx);
+        selx.val(selectedx); // set cached selected value
+</script>
+
+ <script src="../asset/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+  <script type="text/javascript">
+    // Date Picker
+    jQuery('.mydatepicker').datepicker();
+    </script>
+
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5abb6f82d7591465c708fbe6/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

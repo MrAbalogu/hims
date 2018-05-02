@@ -1,0 +1,201 @@
+ 
+   <!--  <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+     -->
+    <div id="wrapper">
+        <!-- Navigation -->
+        <%= render 'layouts/shared/nav' %>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                        <ol class="breadcrumb">
+                            <li><a href="#">HealthCare Provider</a></li>
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!--row -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <div class="r-icon-stats">
+                                <i class="ti-user bg-megna"></i>
+                                <div class="bodystate">
+                                    <h4><%=@total_enrolees.count%></h4>
+                                    <span class="text-muted">New Enrolees</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <div class="r-icon-stats">
+                                <i class="ti-shopping-cart bg-info"></i>
+                                <div class="bodystate">
+                                    <h4><%= @total_claims.count%></h4>
+                                    <span class="text-muted">New Claims</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <div class="r-icon-stats">
+                                <i class="ti-wallet bg-success"></i>
+                                <div class="bodystate">
+                                    <h4>0</h4>
+                                    <span class="text-muted">Authorization Requests</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <div class="r-icon-stats">
+                                <i class="ti-wallet bg-inverse"></i>
+                                <div class="bodystate">
+                                    <h4>₦100,000</h4>
+                                    <span class="text-muted">Total Claims Processed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/row -->
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                             <div class="panel panel-primary">
+                                    <div class="panel-heading"><h3 class="box-title" style="color: white;"><small class="pull-right m-t-10 text-success" ><span class="badge badge-primary"><i class="fa fa-sort-asc"></i> 10% Higher than last month</small> </span> New Enrolees</h3>
+                                        <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+                                    </div>
+                                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <div class="stats-row">
+                                                <div class="stat-item">
+                                                    <h6>Overall</h6>
+                                                    <b>80.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Montly</h6>
+                                                    <b>15.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Day</h6>
+                                                    <b>5.50%</b></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <div class="panel panel-info">
+                                    <div class="panel-heading"><h3 class="box-title" style="color: white;"><small class="pull-right m-t-10 text-success" ><span class="badge badge-primary"><i class="fa fa-sort-asc"></i> 12% Higher than last month</small> </span> New Claims</h3>
+                                        <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+                                    </div>
+                                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <div class="stats-row">
+                                                <div class="stat-item">
+                                                    <h6>Overall</h6>
+                                                    <b>80.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Montly</h6>
+                                                    <b>15.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Day</h6>
+                                                    <b>5.50%</b></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <div class="panel panel-danger">
+                                    <div class="panel-heading"><h3 class="box-title" style="color: white;"><small class="pull-right m-t-10 text-danger" ><span class="badge badge-primary"><i class="fa fa-sort-desc"></i> 28% Lesser than last month</small> </span> Authorization Requests</h3>
+                                        <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a> </div>
+                                    </div>
+                                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <div class="stats-row">
+                                                <div class="stat-item">
+                                                    <h6>Overall</h6>
+                                                    <b>80.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Montly</h6>
+                                                    <b>15.40%</b></div>
+                                                <div class="stat-item">
+                                                    <h6>Day</h6>
+                                                    <b>5.50%</b></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">New Enrolees For This Month</h3>
+                            <p class="text-muted">most recent enrolees</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>MNL Number</th>
+                                            <th>Company</th>
+                                            <th>Cover Status </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <% if current_provider %>
+                                        <% counter = 1 %>
+                                        <% @enrolees.each do |enrolee| %>
+                                        <tr>
+                                            <td><%=counter%></td>
+                                            <td><%=enrolee.firstname%></td>
+                                            <td><%=enrolee.surname%></td>
+                                            <td><%=enrolee.enrolee_number%></td>
+                                            <td><%=enrolee.company_name%>
+                                            <td><span class="label label-info"><%=enrolee.cover_status%></span> </td>
+                                        </tr>
+                                        <% counter += 1 %>
+                                        <% end %>
+                                    <% end %>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- /.row -->
+               
+            </div>
+            <!-- /.container-fluid -->
+           <footer class="footer text-center"> 2018 &copy; HIIS</footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    

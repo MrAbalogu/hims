@@ -1,0 +1,227 @@
+ <%= render 'layouts/shared/nav' %>
+ <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">All Enrolee Details</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=current_insurer.company_name%></a></li>
+                            <li class="active">View All Enrolees</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Enrolees</h1>
+
+<%= link_to 'New Enrolee', new_insurer_enrolee_path, class: 'btn btn-success btn-md pull-right' %> <br/><hr/>
+
+
+
+
+
+
+<div class="search_area" style="border: 1px solid #eaeaea; padding: 10px;"> 
+  <label><b>Search Terms</b></label>
+  <form class="form-group" method="get" action="<%=insurer_enrolees_path%>">
+    <div class="row">
+      <div class="col-sm-4">
+                                      <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">Policy Number</span>
+                                            <input type="text" name="enrolee_number" class="form-control" placeholder="e.g MNL/2018/PN/0022" aria-describedby="basic-addon1">
+                                        </div>
+        </div>
+
+        <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="name" placeholder= "Firstname or Lastname"/>
+        </div>
+
+        <div class="col-sm-4">
+            <select class="form-control" name="company_name">
+                                      <option value="" selected="selected">SELECT COMPANY</option>
+                                     <% current_insurer.companies.each do |company| %>
+                                      <option value="<%=company.name%>"><%=company.name%> </option>
+                                      <% end %>
+                                    </select>
+                      <!-- <input type="text" class="form-control" name="company_name" placeholder= "Company Name"/> -->
+
+                                  
+        </div>
+        <hr/>
+
+         <div class="col-sm-4">
+                                    <select class="form-control" name="plan_name">
+                                      <option value="" selected="selected">CHOOSE PLAN</option>
+                                      <% current_insurer.plans.each do |plan| %>
+                                      <option value="<%=plan.name%>"><%=plan.name%> </option>
+                                      <% end %>
+                                    </select>
+        </div>
+         <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="provider_name" placeholder= "Provider Name"/>
+        </div>
+
+         <div class="col-sm-4">
+                      
+
+                                    <button type="submit" class="btn btn-md btn-block btn-primary" data-disable-with="Processing..."> Search </button>
+        </div>
+
+      </div>
+  </form>
+
+
+
+</div> <br/>
+
+<table id="enrolees_table" class="table table-responsive table-dark table-striped table-bordered">
+  <thead class="success">
+    <tr class="table-success">
+      <th></th>
+      <th>Surname</th>
+      <th>Firstname</th>
+      <th>Company</th>
+      <th>Enrolee number</th>
+      <th>Primary provider</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>State</th>
+      <th>Cover status</th>
+      <th>Card issued</th>
+      <th>Plan</th>
+      <th>Expiry date</th>
+     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody class="table-hover">
+
+
+
+    <% @enrolees.each do |enrolee| %>
+    <tr>
+
+      <td>
+          <%= link_to fa_icon('fa-eye 3x') , show_dependants_group_path(enrolee_id: enrolee.id), class: 'btn fa fa-eye', remote:true %>
+
+        </td>
+
+      <td><%= link_to enrolee.surname, insurer_enrolee_path(enrolee) %></td>
+      <td><%= link_to enrolee.firstname, insurer_enrolee_path(enrolee) %></td>
+      <td> <%= enrolee.company.name%> </td>
+      <td> <%=enrolee.enrolee_number %> </td>
+      <td> <%= enrolee.primary_provider %> </td>
+      <td> <%= enrolee.phone %> </td>
+      <td><%= enrolee.email %></td>
+      <td><%= enrolee.location %> </td>
+
+
+        <td>   <% if enrolee.cover_status == 'active' %>
+                                                <span class="badge badge-success">active </span>
+
+                                                <% else %>
+                                                <span class="badge badge-default">inactive </span>
+                                               
+
+                                              <% end %>  </td>
+
+
+
+        <td>   <% if enrolee.card_issued %>
+                                                <span class="badge badge-success">Yes </span>
+
+                                                <% else %>
+                                                <span class="badge badge-default">No </span>
+                                               
+
+                                              <% end %>  </td>
+        <td> <%= enrolee.plan %> </td>
+        <td> <%= enrolee.expiry_date.strftime("%F") %></td>
+         <td><%= link_to 'View', insurer_enrolee_path(enrolee), class: 'btn btn-sm btn-info' %></td>
+        <td><%= link_to 'Edit', edit_insurer_enrolee_path(enrolee), class: 'btn btn-sm btn-primary'  %></td>
+        <td><%= link_to 'Destroy', insurer_enrolee_path(enrolee), class: 'btn btn-sm btn-danger',  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+
+
+
+    </tr>
+    <% end %>
+   
+  </tbody>
+
+
+
+</table>
+
+
+
+
+
+<br>
+
+<%= will_paginate @enrolees, :renderer => WillPaginate::ActionView::LinkRenderer %>
+
+
+
+                           
+
+                   
+
+
+
+
+
+
+        
+
+                        </div>
+
+                        
+
+            
+                    <div id="showDependants">
+
+
+                    </div>
+
+
+
+
+
+                    </div>
+                </div>
+               
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIIS </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+
+

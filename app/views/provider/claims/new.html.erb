@@ -1,0 +1,90 @@
+ <%= render 'layouts/shared/nav' %>
+ <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">New Claim</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" target="_blank" class="btn btn-info pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Need Help?</a>
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=current_provider.company_name%></a></li>
+                            <li class="active">New Claim</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="white-box">
+                    <div class="row">
+                  
+                  
+                        <div class="col-md-12">
+                         <div class="pull-right">
+                            <h3>
+                              <% if @enrolee.nil? %>
+                                Creating New Claim
+
+                                <% else %>
+
+                                   Creating claim for  <b>
+                                    <%= "#{@enrolee.surname} #{@enrolee.firstname}" %>  </b>
+                                    
+                                <% end %>
+                            </h3>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-12">
+
+
+
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                               
+                                + STEP 1 [Basic Info]
+
+                            </div>
+                            <div class="panel-body">
+                            <span class="badge info" id="notification"></span>
+                                
+
+
+
+                            
+                            <%= render 'form', claim: @claim %>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+
+
+
+        
+
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIISafrica </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+

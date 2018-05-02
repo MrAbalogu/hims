@@ -1,0 +1,160 @@
+ <%= render 'layouts/shared/nav' %>
+ <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Upload Dependants Data</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=current_insurer.company_name%></a></li>
+                            <li class="active">DATA Upload</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+
+                           
+
+                    <div class="row">
+                  
+                    <div class="col-md-12">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">Excel, csv dependants data upload
+                            </div>
+                            <div class="panel-body">
+                            <span class="badge info" id="notification"></span>
+                            
+                            <h2> See format Below</h2>
+
+                            <table class="table table-responsive table-condensed">
+                                <tr>
+                                    <th>Company Name </th>
+                                    <th>Surname </th>
+                                    <th>Firstname </th>
+                                    <th>Middle Name </th>
+                                    <th>Enrolee Number </th>
+                                     <th>Principal Number</th>
+                                    <th>Primary Hospital</th>
+                                    <th>Phone </th>
+                                    <th>Date of Birth</th>
+                                    <th>Sex </th>
+                                    <th>Location(state)</th>
+                                    <th>ID card issued </th>
+                                    
+
+                                </tr>
+
+                                <tr>
+                                    <td> A  </td>
+                                    <td> B  </td>
+                                    <td> C  </td>
+                                    <td> D  </td>
+                                    <td> E  </td>
+                                    <td> F  </td>
+                                    <td> G  </td>
+                                    <td> H  </td>
+                                    <td> I  </td>
+                                    <td> J  </td>
+                                    <td> K  </td>
+                                    <td> L  </td>
+                                    <td> M  </td>
+
+                                </tr>
+
+                            </table>
+
+                             <br/>
+                            <hr/>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                     Data Upload Section 
+                                </div>
+
+                                <div class="panel-body">
+
+                                            <%=form_tag insurer_dependants_populatedb_path, multipart:true do %>
+                                           
+                                                <div class="row">
+                                                 <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <select name="company_name" class="form-control">
+                                                                <% current_insurer.companies.each do |company| %>
+                                                                 <option value="<%=company.name%>"><%=company.name%></option>
+                                                                <% end %>
+                                                                
+                                                            </select>
+
+                                                        </div>
+
+                                                </div>
+                                                </div>
+
+                                                <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+
+                                                    <label>Upload Dependants List</label>
+                                                    <%= file_field_tag :dependants_list, class: 'form-control', required: true %>
+                                                   <br/>
+
+
+                                            <%= submit_tag "Upload Data", class: 'btn btn-lg btn-primary pull-right', 'data-disable-with': 'Uploading Data (please wait...)' %>
+                                           
+
+
+                                                   
+
+                                                </div>
+                                            </div>
+                                           </div>
+
+                                            <% end %>
+                                </div>
+
+                                <div class="panel-footer">
+
+
+                                </div>
+                            </div>
+
+
+
+
+                                    
+
+
+
+
+
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+
+
+
+        
+
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIIS </footer>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+
+

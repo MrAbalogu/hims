@@ -1,0 +1,6 @@
+$("#services_list").html("<%= escape_javascript(render('services/list')) %>");
+$("#notification").html('+ Added Successfully');
+$("#servicesModal").modal("hide");
+$("#drugsModal").modal("hide");
+$('#sa-success').find('a').trigger('click');
+toastr.success('New Item Added to Claim', 'Success');

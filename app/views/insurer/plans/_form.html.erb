@@ -1,0 +1,33 @@
+<%= form_with(model: plan, url: insurer_plans_path, local: true) do |form| %>
+  <% if plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+      <% plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :plan_name, class: 'form-control' %>
+  </div>
+
+  <%= form.hidden_field :insurer_id, value: current_insurer.id %>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :plan_description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Plan", class: 'btn btn-md btn-success', 'data-disable-with': 'please wait' %>
+  </div>
+</div>
+</div>
+<% end %>

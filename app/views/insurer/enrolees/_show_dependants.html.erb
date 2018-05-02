@@ -1,0 +1,71 @@
+
+     <!--- dependants modal -->
+
+                            <div class="white-box">
+
+
+                            <div class="modal fade" id="showDependantsModal" tabindex="-1" role="dialog" aria-labelledby="showDependantsModalLabel1">
+                                <div class="modal-dialog modal-lg" role="document">
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="exampleModalLabel1"><%=@enrolee.enrolee_number%> -  Dependants</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <table class="table table-hover table-striped table-responsive table-condensed">
+                                            <thead class="success">
+                                                <tr>
+                                                    <th>Surname</th>
+                                                    <th>Firstname</th>
+                                                    <th>Policy Number</th>
+                                                    <th>DOB</th>
+                                                    <th>Provider </th>
+                                                    <th>Type </th>
+                                                    <th>Action</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                    
+                                                  <% @enrolee.dependants.each do |dependant| %>
+                                                    <tr>
+                                                       
+                                                        <td><%=dependant.surname%></td>
+                                                        <td><%=dependant.firstname%></td>
+                                                        <td><%=dependant.enrolee_number%></td>
+                                                        <td><%=dependant.dob.strftime("%F") if !dependant.dob.nil? %></td>
+                                                       
+                                                          <td> <%=dependant.primary_hospital%></td>
+                                                          <td><%=dependant.dependant_type%></td>
+                                                          <td> <%= link_to "more", insurer_enrolee_path(@enrolee), class: 'btn btn-sm btn-default', 'data-disable-with': 'please wait' %></td>
+                                                          
+
+                                                    </tr>
+                                                  
+                                                  <% end %>
+                                                   
+                                                </tbody>
+
+                                     
+                                             </table>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                                          
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+
+                        </div>
+                  
+
+
+
+
+
+                    <!--- end of dependants modal -->

@@ -1,0 +1,210 @@
+ <%= render 'layouts/shared/nav' %>
+
+ <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Enrolee</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                        <ol class="breadcrumb">
+                            <li><a href="#"><%=current_provider.company_name%></a></li>
+                            <li class="active">Enrolee Details</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="white-box">
+                            <div class="user-bg"> <img width="100%" alt="user" src="<%=@enrolee.photo.url%>"> </div>
+                            <div class="user-btm-box">
+                                <!-- .row -->
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-6 b-r"><strong>Name</strong>
+                                        <p><%=@enrolee.surname%> <%=@enrolee.firstname%>  </p>
+                                    </div>
+                                    <div class="col-md-6"><strong>Enrolee Number</strong>
+                                        <p><%=@enrolee.enrolee_number%></p>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                                <hr>
+                                <!-- .row -->
+                                 <div class="row text-center m-t-10">
+                                    <div class="col-md-12 b-r"><strong>Company Name</strong>
+                                        <p><%=@enrolee.company_name%></p>
+                                    </div>
+                                   
+                                </div>
+                                <hr/>
+
+                                <div class="row text-center m-t-10">
+                                    
+                                    
+                                    <div class="col-md-12 b-r"><strong>Email Address</strong>
+                                        <p><%=@enrolee.email%></p>
+                                    </div>
+                                </div>
+
+                                <hr/>
+
+
+                                <div class="row text-center m-t-10">
+                                    
+                                    <div class="col-md-12"><strong>Phone</strong>
+                                        <p><%=@enrolee.phone%></p>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                                <hr>
+
+
+                                <div class="row text-center m-t-10">
+                                    
+                                    <div class="col-md-12"><strong>Sex</strong>
+                                        <p><%=@enrolee.sex%></p>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                                <hr>
+
+                                  <div class="row text-center m-t-10">
+                                    
+                                    <div class="col-md-12"><strong>Residence</strong>
+                                        <p><%=@enrolee.location%></p>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                                <hr>
+
+                                <!-- .row -->
+                                 <div class="row text-center m-t-10">
+                                    <div class="col-md-12"><strong>Primary Hospital</strong>
+                                        <p><%=@enrolee.primary_provider%>
+                                           
+                                    </div>
+                                </div>
+
+                               
+                                <hr>
+                                <!-- /.row -->
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+                        <div class="white-box">
+                           
+
+                           
+
+                             <div class="panel panel-success">
+                            <div class="panel-heading panel-success">Dependants Details </div>
+                            <div class="panel-wrapper collapse in">
+                                <table class="table table-hover table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>SurName</th>
+                                            <th>First Name</th>
+                                            <th>Member Code</th>
+                                            <th>Date of Birth</th>
+                                            <th>Primary Provider </th>
+                                            <th>Dependant Type </th>
+                                           
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dependants_list">
+                                      <% counter = 1 %>
+                                      <% @enrolee.dependants.each do |dependant| %>
+                                        <tr>
+                                            <td align="center"><%=counter%></td>
+                                            <td><%=dependant.surname%></td>
+                                            <td><%=dependant.firstname%></td>
+                                            <td><%=dependant.enrolee_number%></td>
+                                            <td><%=dependant.dob.strftime("%F") if !dependant.dob.nil? %></td>
+                                           
+                                              <td> <%=dependant.primary_hospital%></td>
+                                              <td><%=dependant.dependant_type%></td>
+                                             
+
+                                        </tr>
+                                        <% counter = counter + 1 %>
+                                      <% end %>
+                                       
+                                    </tbody>
+
+                                     
+                                </table>
+
+                            
+                            </div>
+                        </div>
+                           
+
+
+
+
+                          <!--   <h4 class="m-t-30">General Report</h4>
+                            <hr>
+                            <h5>Heart Beat <span class="pull-right">80</span></h5>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%;"> <span class="sr-only">50% Complete</span> </div>
+                            </div>
+                            <h5>Blood Pressure<span class="pull-right">90</span></h5>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%;"> <span class="sr-only">50% Complete</span> </div>
+                            </div>
+                            <h5>Sugar<span class="pull-right">50</span></h5>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%;"> <span class="sr-only">50% Complete</span> </div>
+                            </div>
+                            <h5>Haemoglobin<span class="pull-right">70%</span></h5>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%;"> <span class="sr-only">50% Complete</span> </div>
+                            </div>
+                            <h4 class="m-t-30">ECG Report</h4>
+                            <hr>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <h6>Pulse</h6> <b>85</b></div>
+                                <div class="stat-item">
+                                    <h6>BP</h6> <b>120</b></div>
+                            </div> -->
+                            <div style="height: 280px;">
+                                <div id="placeholder" class="demo-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+
+
+
+
+
+          
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2018 &copy; HIIS </footer>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

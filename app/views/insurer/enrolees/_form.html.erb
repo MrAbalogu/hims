@@ -1,0 +1,241 @@
+  
+
+
+<%= form_with(model: enrolee, url: insurer_enrolees_path, local: true) do |form| %>
+  <% if enrolee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enrolee.errors.count, "error") %> prohibited this enrolee from being saved:</h2>
+
+      <ul>
+      <% enrolee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group">
+          <div class="row">     
+          <div class="col-md-6">
+                                    <label class="col-md-12" for="company"> Company Name
+                                    </label>
+                                      <div class="col-md-12">
+                                     <%= form.select :company_id, options_for_select(current_insurer.companies.all.collect {|c| [ c.name, c.id ] }), {}, {id: :company_id, class: 'form-control', required: true} %>
+                                     
+                                    </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="" for="registration_date">Registration Date</span>
+                                    </label>
+                                    <div class="">
+                                      <%= form.text_field :date, class: 'form-control mydatepicker', value: '2018-01-03' %>
+
+                                    </div>
+            </div>
+            
+     </div>
+     </div>
+
+
+
+    <div class="row">
+            <div class="col-md-6">
+                <div class="">
+                                                <label class="col-md-12" for="surname">Surname
+                                                </label>
+                                                <div class="col-md-12">
+                                                <%= form.text_field :surname, class: 'form-control', placeholder: 'Enter Surname', required: true %>
+                                                </div>
+                </div>
+
+              
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="">
+                                                    <label class="col-md-12" for="firstname">Firstname
+                                                    </label>
+                                                    <div class="col-md-12">
+                                                    <%= form.text_field :firstname, class: 'form-control', placeholder: 'Firstname e.g. JOHN AKIN', required: true %>
+                                                    </div>
+                    </div>
+            </div>
+    </div>
+    <br/>
+
+     <div class="row">
+            <div class="col-md-6">
+                <div class="">
+                                                <label class="col-md-12" for="middlename">Middlename
+                                                </label>
+                                                <div class="col-md-12">
+                                                <%= form.text_field :middlename, class: 'form-control', placeholder: 'Enter Middlename' %>
+                                                </div>
+                </div>
+
+              
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="">
+                                                    <label class="col-md-12" for="email">Email
+                                                    </label>
+                                                    <div class="col-md-12">
+                                                    <%= form.text_field :email, class: 'form-control', placeholder: 'Enter Email' %>
+                                                    </div>
+                    </div>
+            </div>
+    </div>
+<br/>
+  
+                               
+
+    <div class="row">
+
+                      <div class="col-md-6">
+                        <label for="primary_provider_name"> Select Primary Provider </label>
+                        <div class="">
+                            <%=form.select :primary_provider, options_for_select(Provider.all.collect {|p| [ p.company_name, p.company_name ] }, Provider.first.company_name), {}, {id: 'primary_provider_id', class: 'form-control'} %>
+                        </div>
+                        <span class="validate_notification"></span>
+                      </div>
+
+
+                       <div class="col-md-6">
+                        <label for="primary_provider_name"> Secondary Provider </label>
+                        <div class="">
+                            <%=form.select :secondary_provider, options_for_select(Provider.all.collect {|p| [ p.company_name, p.company_name ] }, Provider.first.company_name), {}, {id: 'secondary_provider_id', class: 'form-control'} %>
+                        </div>
+                        <span class="validate_notification"></span>
+                      </div>
+
+
+    </div>
+    <br/>
+
+    <br/>
+    <div class="row">
+
+                      <div class="col-md-6">
+
+
+                                        <label class="" for="phone"> Enrolee Phone Number
+                                        </label>
+                                        <div class="">
+                                        <%= form.text_field :phone, id: :enrolee_phone, class: 'form-control', placeholder: 'Enter Mobile Number'%>
+                                        </div>
+                        </div>
+
+                      <div class="col-md-6">
+                                        <label class="" for="authority_designation">Date of Birth
+                                        </label>
+                                        <div class="">
+                                        <%= form.text_field :dob, class: 'form-control mydatepicker'%>
+
+                                        </div>
+                      </div>
+      </div>
+
+      <br/>
+      <div class="row">
+
+                      <div class="col-md-6">
+
+
+                                        <label class="" for="phone"> Home Address
+                                        </label>
+                                        <div class="">
+                                        <%= form.text_area :address, id: :enrolee_address, class: 'form-control', placeholder: 'Enter Enrolee Address'%>
+                                        </div>
+                        </div>
+
+                      <div class="col-md-6">
+                                        <label class="" for="authority_designation">SEX
+                                        </label> 
+                                        <div class="form-group">
+                                       
+                                        <%= form.radio_button :sex, "male", checked: true %> Male
+                                        <%= form.radio_button :sex, "female", checked: true %> Female
+                                      </div>
+                                        
+                      </div>
+      </div>
+
+
+      <br/>
+
+       <div class="row">
+
+                      <div class="col-md-6">
+
+
+                                        <label class="" for="state"> Enrolee State
+                                        </label>
+                                        <div class="">
+                                        <%= form.select :location, options_for_select([['Abuja', 'abuja'], ['Lagos', 'lagos'], 'Portharcourt', 'ph'], ['Plateau', 'plateau']), {}, {id: :location, class: 'form-control'} %>
+                                        </div>
+                        </div>
+
+                      <div class="col-md-6">
+                                        <label class="" for="authority_designation">Upload Passport Photo
+                                        </label>
+                                        <div class="">
+                                        <%= form.file_field :photo, class: 'form-control' %>
+
+                                        </div>
+                      </div>
+      </div>
+
+     
+      <br/>
+<hr/>
+        <div class="row"> 
+
+                      <div class="col-md-6">
+
+
+                                        <label class="" for="plan"> Select Plan 
+                                        </label>
+                                        <div class="">
+                                        <%= form.select :plan, options_for_select(current_insurer.plans.all.collect {|p| [ p.name, p.name ] }), {}, {id: :plan, class: 'form-control'} %>
+                                        </div>
+                        </div>
+
+                      <div class="col-md-6">
+                            <label class="" for="card_issued"> ID Card Issued </label>
+                            <div class="">  
+                              <%= form.select :card_issued, options_for_select([["YES", true], ["NO", false]], false), {}, {class: 'form-control'} %>
+
+                            </div>
+
+                        <%= form.hidden_field :cover_status, value: 'active' %>
+
+                        <%= form.hidden_field :expiry_date, value: Time.now+365.days %>
+                                     
+                      </div>
+      </div>
+
+
+
+
+
+        <br/><hr/>
+        <div class="row">
+            <div class="col-md-6">
+        
+                <button type="submit" class="btn btn-inverse btn-md waves-effect waves-light pull-left">Cancel</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn  btn-lg btn-success btn-block waves-effect waves-light m-r-10" data-disable-with="Processing ...">Save and Continue >></button>
+            </div>
+      </div>
+
+
+<% end %>
+

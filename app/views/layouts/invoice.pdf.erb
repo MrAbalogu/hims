@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+ <title>HIIS Health Insurance  Management System</title>
+
+
+        <%= wicked_pdf_stylesheet_link_tag 'application' -%>
+    
+    <%= wicked_pdf_stylesheet_link_tag 'bootstrap/dist/css/bootstrap.min' %>
+
+    <%= wicked_pdf_stylesheet_link_tag 'css/style' %>
+
+    <%= wicked_pdf_stylesheet_link_tag 'css/colors/green' %>
+
+
+
+
+    <%= wicked_pdf_javascript_include_tag 'application' %>
+    
+     <%= wicked_pdf_javascript_include_tag "plugins/bower_components/jquery/dist/jquery.min" %>
+        <%= wicked_pdf_javascript_include_tag "bootstrap/dist/js/bootstrap.min" %>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../asset/favicons/android-icon-192x192.png">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+<style>
+
+  body * {
+    visibility: hidden;
+  }
+  .printArea, .printArea * {
+    visibility: visible;
+  }
+  .printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+</style>
+
+
+    
+</head>
+<body>
+
+
+       
+        <%= yield %>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

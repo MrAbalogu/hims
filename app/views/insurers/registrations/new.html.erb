@@ -1,0 +1,68 @@
+ <!-- Preloader -->
+   
+    
+<section id="wrapper" class="step-register">
+  <div class="register-box">
+    <div class="">
+       <a href="<%=root_path%>" class="text-center db"><img src="../asset/plugins/images/HIISlogoxx.png" alt="Home" /><br/></a>
+      
+
+       <hr/>
+      <!-- multistep form -->
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: 'msform', multipart: true}) do |f| %>
+        <!-- progressbar -->
+        <%= devise_error_messages! %>
+
+        <ul id="eliteregister">
+        <li class="active"> Account Setup</li>
+        <li>Social Profiles</li>
+        <li>Insurer Details</li>
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+        <h2 class="fs-title">Account Setup</h2>
+   
+          <%= f.email_field :email, autofocus: true, placeholder: 'Email', required: true %>
+         
+          <%= f.password_field :password, autocomplete: "off", placeholder: 'Password (6 Characters Minimum)', required: true %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm Password' %>
+
+        <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+        <h2 class="fs-title">Social Profiles</h2>
+        <%= f.text_field :facebook, autofocus: true, placeholder: 'Facebook'%>
+        <%= f.text_field :twitter, placeholder: 'Twitter '%>
+        <%= f.text_field :google_plus, placeholder: 'Google Plus' %>
+        <label for="avatar">Avatar </label>
+        <%= f.file_field :avatar, placeholder: 'Avatar' %>
+       
+
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+        <h2 class="fs-title">Insurer Details</h2>
+        <%= f.text_field :company_name, autofocus:true, placeholder: 'Insurance Company Name', required: true %>
+        <%= f.text_field :address, placeholder: 'Address', required: true %>
+        <%= f.text_field :phone, placeholder: 'Enter Contact Number', required: true %>
+        <%= f.text_area :description, placeholder: 'Description', required: true %>
+        <%= f.text_field :website, placeholder: 'Official Company Website' %>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <%= f.submit "Submit", class: 'action-button' %>
+        </fieldset>
+        </form>
+      <% end %>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+

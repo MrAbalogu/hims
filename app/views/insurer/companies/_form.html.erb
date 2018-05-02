@@ -1,0 +1,41 @@
+<%= form_with(model: company, url: insurer_companies_path, local: true) do |form| %>
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+      <% company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :company_name, class: 'form-control' %>
+  </div>
+
+  <%= form.hidden_field :insurer_id, value: current_insurer.id %>
+
+  <div class="form-group">
+    <%= form.label :address%>
+    <%= form.text_area :address, id: :company_address, class: 'form-control' %>
+  </div>
+
+
+
+  <div class="form-group">
+    <%= form.label :contact, "Contact Phone" %>
+    <%= form.text_field :contact, id: :company_contact, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Add Company", class: 'btn btn-success btn-md', 'data-disable-with': 'please wait' %>
+  </div>
+</div>
+</div>
+<% end %>

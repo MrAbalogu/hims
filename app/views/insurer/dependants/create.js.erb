@@ -1,0 +1,3 @@
+$("#dependants_list").html("<%= escape_javascript(render('insurer/dependants/list')) %>");
+$("#dependantsModal").modal("hide");
+toastr.success('New Dependant Details Added to Enrolee', 'Success');
